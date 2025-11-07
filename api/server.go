@@ -734,6 +734,9 @@ func (s *Server) handleDeleteTrader(c *gin.Context) {
 		}
 	}
 
+	// 无论是否在内存中，尝试移除并清空竞赛缓存
+	s.traderManager.RemoveTrader(traderID)
+
 	log.Printf("✓ 交易员已删除: %s", traderID)
 	c.JSON(http.StatusOK, gin.H{"message": "交易员已删除"})
 }
